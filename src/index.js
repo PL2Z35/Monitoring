@@ -9,7 +9,7 @@ const app = express();
 
 //settings
 app.set('port',process.env.PORT || 4000);
-app.set('views', path.join(__dirname,'viwes'));
+app.set('views', path.join(__dirname,'views'));
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'),'layouts'), 
@@ -21,7 +21,7 @@ app.set('view engine','.hbs');
 
 //Middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({extends: false}));
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 //Global Variables
