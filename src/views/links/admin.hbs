@@ -1,0 +1,229 @@
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="..." />
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
+    </div>
+</header>
+<!-- Portfolio Section-->
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Carreras</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar Carreras..">
+            <table id="myTable">
+                <tr class="header">
+                    <th style="width:60%;">Id</th>
+                    <th style="width:40%;">Carrera</th>
+                </tr>
+                {{#each carreras}}
+                <tr>
+                    <td>{{idCarrera}}</td>
+                    <td>{{Nombre}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modaladd"> Adicionar
+            </button>
+        </div>
+</section>
+<!-- About Section-->
+<section class="page-section portafolio bg-third" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Usuarios</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <div class="row justify-content-center">
+            <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Buscar Usuarios..">
+
+            <table id="myTable2">
+                <tr class="header">
+                    <th style="width:15%;">Id</th>
+                    <th style="width:25%;">Nombres</th>
+                    <th style="width:25%;">Apellidos</th>
+                    <th style="width:15%;">Tipo</th>
+                    <th style="width:20%;">Carrera</th>
+                </tr>
+                {{#each usuarios}}
+                <tr>
+                    <td>{{idUsuario}}</td>
+                    <td>{{Nombres}}</td>
+                    <td>{{Apellidos}}</td>
+                    <td>{{Tipo}}</td>
+                    <td>{{Carrera}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModaladdUsuario">
+                Adicionar
+            </button>
+        </div>
+    </div>
+</section>
+<!-- Footer-->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Location-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Location</h4>
+                <p class="lead mb-0">
+                    2215 John Daniel Drive
+                    <br />
+                    Clark, MO 65243
+                </p>
+            </div>
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Around the Web</h4>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+            </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                <p class="lead mb-0">
+                    Freelance is a free to use, MIT licensed Bootstrap theme created by
+                    <a href="http://startbootstrap.com">Start Bootstrap</a>
+                    .
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Your Website 2021</small></div>
+</div>
+
+<!-- Portfolio Modals-->
+<!-- Portfolio Modal 1-->
+<div class="portfolio-modal modal fade" id="Modaladd" tabindex="-1" aria-labelledby="portfolioModal1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                    aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Adicionar Carrera</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Text-->
+                            <form action="/links/addCarrera" method="POST">
+                                <div class="form-floating mb-3">
+                                    <input name="Nombre" class="form-control" id="phone" type="tel"
+                                        placeholder="(123) 456-7890" data-sb-validations="required" />
+                                    <label for="phone">Nombre</label>
+                                </div>
+                                <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Portfolio Modal 2-->
+<div class="portfolio-modal modal fade" id="ModaladdUsuario" tabindex="-1" aria-labelledby="portfolioModal1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                    aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Adicionar Usuarios</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Text-->
+                            <form action="/links/addUsuario" method="POST">
+                                <div class="form-floating mb-3">
+                                    <input name="idUsuario" class="form-control" id="codigo" type="tel"
+                                        placeholder="(123) 456-7890" data-sb-validations="required" />
+                                    <label for="codigo">Codigo</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input name="Nombres" class="form-control" id="nombres" type="tel"
+                                        placeholder="(123) 456-7890" data-sb-validations="required" />
+                                    <label for="nombres">Nombres</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input name="Apellidos" class="form-control" id="apellidos" type="tel"
+                                        placeholder="(123) 456-7890" data-sb-validations="required" />
+                                    <label for="phone">Apellidos</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select name="Tipo_idTipo" class="form-control">
+                                        {{#each tipos}}
+                                            <option type="tel" value={{idTipo}}>{{Tipo}}</option>
+                                        {{/each}}
+                                    </select>
+                                    <label for="codigo">Tipo</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select name="Carrera_idCarrera" class="form-control">
+                                        {{#each carreras}}
+                                            <option type="tel" value={{idCarrera}}>{{Nombre}}</option>
+                                        {{/each}}
+                                    </select>
+                                    <label for="codigo">Carrera</label>
+                                </div>
+                                <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
