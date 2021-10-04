@@ -6,11 +6,13 @@ const exp = require('constants');
 const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
+const passport = require('passport');
 
 const {database} = require('./keys');
 
 //initializations
 const app = express();
+require('./lib/passport');
 
 //settings
 app.set('port',process.env.PORT || 4000);
@@ -35,6 +37,8 @@ app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 //Global Variables
@@ -42,13 +46,17 @@ app.use((req, res, next) => {
     app.locals.message = req.flash('message');
     app.locals.success = req.flash('success');
     app.locals.user = req.user;
+    app.locals.type = req.type;
     next();
 });
+global.userActive = null;
+global.typeActive = null;
 
 //Routes
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
-app.use('/links',require('./routes/links'));
+app.use('/user',require('./routes/admin'));
+app.use('/user',require('./routes/secretary'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
