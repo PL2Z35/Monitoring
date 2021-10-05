@@ -51,6 +51,7 @@ app.use((req, res, next) => {
 });
 global.userActive = null;
 global.typeActive = null;
+global.userCarrera = null;
 
 //Routes
 app.use(require('./routes'));

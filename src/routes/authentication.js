@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const pool = require('../database/database');
+const helpers = require('../lib/helpers');
 
 router.get('/index', (req,res)=>{
     res.render('index');
 })
 
-router.post('/index', (req,res)=>{
+router.post('/index', async(req,res)=>{
     const{idUsuario, Password}=req.body;
     const newObject = {idUsuario,Password}
     console.log(newObject);
@@ -14,8 +16,24 @@ router.post('/index', (req,res)=>{
         userActive = "Administrador";
         typeActive = "Administrador";
         res.redirect('/user/admin');
+    }else if(newObject.idUsuario!=null&&newObject.Password!=null){
+        const object = await pool.query('select * from usuario where idUsuario = ?',[newObject.idUsuario]);
+        if(object.length!=0){
+            const resp = await helpers.matchPassword(newObject.Password,object[0].Password);
+        if(resp){
+            userActive = object[0].idUsuario;
+            typeActive = object[0].Tipo_idtipo;
+            userCarrera = object[0].Carrera_idCarrera;
+            if(object[0].Tipo_idtipo==1){
+                res.redirect('/user/secretary');
+            }
+        }else{
+            res.redirect('/');
+        }
+        }
+        res.redirect('/');
     }else{
-        res.redirect('/index');
+        res.redirect('/');
     }
 })
 

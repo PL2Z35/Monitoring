@@ -9,10 +9,10 @@ router.get('/admin', async(req, res) =>{
     const tipos = await pool.query('select * from tipo');
     const usuarios = await pool.query('select idUsuario,Nombres,Apellidos,Carrera_idCarrera,Tipo_idTipo,(select Tipo from tipo where usuario.Tipo_idTipo=tipo.idTipo) as Tipo,(select Nombre from carrera where usuario.Carrera_idCarrera=carrera.idCarrera) as Carrera from usuario');
     const Admin = {userActive,typeActive};
-    if(userActive == null||typeActive == null){
-        res.redirect('/');
-    }else{
+    if(userActive=="Administrador"&&typeActive=="Administrador"){
         res.render('user/admin', {carreras,tipos,usuarios,Admin});
+    }else{
+        res.redirect('/');
     }
 })
 
@@ -34,7 +34,6 @@ router.post('/addUsuario', async(req,res) => {
     const newObject = {idUsuario,Nombres,Apellidos,Password,Tipo_idTipo,Carrera_idCarrera};
     if(!isEmpty(newObject)){
         newObject.Password = await helpers.encryptPassword(Password);
-        console.log(newObject);
         await pool.query('insert into usuario set ?', [newObject]);
         req.flash('success', 'Usuario agregado correctamente');
     }else{
