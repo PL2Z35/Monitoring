@@ -22,9 +22,11 @@ router.post('/index', async(req,res)=>{
             const resp = await helpers.matchPassword(newObject.Password,object[0].Password);
         if(resp){
             userActive = object[0].idUsuario;
-            typeActive = object[0].Tipo_idtipo;
+            typeActive = object[0].Tipo_idTipo;
             userCarrera = object[0].Carrera_idCarrera;
-            if(object[0].Tipo_idtipo==1){
+            console.log(object[0].Tipo_idTipo);
+            console.log(object);
+            if(object[0].Tipo_idTipo==1){
                 res.redirect('/user/secretary');
             }
         }else{
