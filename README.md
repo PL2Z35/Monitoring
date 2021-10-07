@@ -1,5 +1,5 @@
 # Monitoring
  Personal Proyect
 
-# Inializaciton
+# inicializacion
 npm run dev
