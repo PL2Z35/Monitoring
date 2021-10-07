@@ -1,0 +1,279 @@
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    {{>message}}
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Estudiante</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0">Este usuario sera el encargado de la asignacion de
+            materias y la ceracion de estas.</p>
+    </div>
+</header>
+
+<section class="page-section portafolio bg-third" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Materias Carrera</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <div class="row justify-content-center">
+            <input type="text" id="myInput4" onkeyup="myFunction4()" placeholder="Buscar Materias..">
+
+            <table id="myTable4">
+                <tr class="header">
+                    <th style="width:20%;">Nombre</th>
+                    <th style="width:40%;">Profesor</th>
+                    <th style="width:20%;">Temas</th>
+                    <th style="width:20%;">Opciones</th>
+                </tr>
+                {{#each materias}}
+                {{#each ../profesores}}
+                <form action="/user/asigMateria/{{../this.idmateria}}" method="POST">
+                    {{#if (eq ../this.idmateria this.materia_idmateria)}}
+                    <tr>
+                        <td>{{../this.Materia}}</td>
+                        <td>{{this.Nombres}} {{this.Apellidos}}</td>
+                        <td><button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#Materia{{../this.idmateria}}"><i class="fas fa-eye"></i></button></td>
+                        <td>
+                            <button class="btn btn-success" type="submit"><i class="fas fa-plus-circle"></i></button>
+                            <a type="button " href="/user/delete/asigMateria/{{../this.idmateria}}"
+                                class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    {{/if}}
+                </form>
+                {{/each}}
+                {{/each}}
+
+            </table>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section-->
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">MATERIAS inscritas</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <div class="row justify-content-center">
+            <!-- Portfolio Item 1-->
+            {{#each materiasmias}}
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal"
+                    data-bs-target="#MateriaEstudiante{{idmateria}}">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="/assets/img/cuaderno.png" alt="..." />
+                    <h3 class="page-section-heading text-center text-secondary mb-0">{{Materia}}</h3>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+
+{{#each materias}}
+<!-- Portfolio Modal 3-->
+<div class="portfolio-modal modal fade" id="Materia{{idmateria}}" tabindex="-1" aria-labelledby="portfolioModal1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                    aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{Materia}}</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Text-->
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            TEMAS
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <table id="myTable3">
+                                                <input type="text" id="myInput3" onkeyup="myFunction3()"
+                                                    placeholder="Buscar Temas..">
+                                                <tr class="header">
+                                                    <th style="width:40%;">Nombre</th>
+                                                    <th style="width:60%;">Descripcion</th>
+                                                </tr>
+                                                {{#each ../temas}}
+                                                {{#if (eq ../this.idmateria this.materia_idmateria) }}
+                                                <tr>
+                                                    <td>{{this.Nombre}}</td>
+                                                    <td>{{this.Descripcion}}</td>
+                                                </tr>
+                                                {{/if}}
+                                                {{/each}}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+{{#each materias}}
+<!-- Portfolio Modal 3-->
+<div class="portfolio-modal modal fade" id="MateriaEstudiante{{idmateria}}" tabindex="-1"
+    aria-labelledby="portfolioModal1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                    aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{Materia}}</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Text-->
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree">
+                                            INFORMACION
+                                        </button>
+                                    </h2>
+                                    {{#each ../profesores}}
+                                    {{#if (eq ../this.idmateria this.materia_idmateria)}}
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="form-floating mb-3">
+                                                <input name="Descripcion" class="form-control" id="phone" type="tel"
+                                                    placeholder="(123) 456-7890" value='{{../this.Materia}}'
+                                                    disabled='disabled' data-sb-validations="required" />
+                                                <label for="phone">Nombre Materia</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input name="Descripcion" class="form-control" id="phone" type="tel"
+                                                    placeholder="(123) 456-7890"
+                                                    value='{{this.Nombres}} {{this.Apellidos}}' disabled='disabled'
+                                                    data-sb-validations="required" />
+                                                <label for="phone">Profesor</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/if}}
+                                    {{/each}}
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            TEMAS
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <table id="myTable3">
+                                                <input type="text" id="myInput3" onkeyup="myFunction3()"
+                                                    placeholder="Buscar Usuarios..">
+                                                <tr class="header">
+                                                    <th style="width:40%;">Nombre</th>
+                                                    <th style="width:40%;">Descripcion</th>
+                                                </tr>
+                                                {{#each ../temas}}
+                                                {{#if (eq ../this.idmateria this.materia_idmateria) }}
+                                                <tr>
+                                                    <td>{{this.Nombre}}</td>
+                                                    <td>{{this.Descripcion}}</td>
+                                                </tr>
+                                                {{/if}}
+                                                {{/each}}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingFour">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                            aria-expanded="false" aria-controls="collapseFour">
+                                            FORO
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                        aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the third item's accordion body.</strong> It is hidden
+                                            by default, until the collapse plugin adds the appropriate classes that
+                                            we use to style each element. These classes control the overall
+                                            appearance, as well as the showing and hiding via CSS transitions. You
+                                            can modify any of this with custom CSS or overriding our default
+                                            variables. It's also worth noting that just about any HTML can go within
+                                            the <code>.accordion-body</code>, though the transition does limit
+                                            overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{{/each}}
+
+</div>

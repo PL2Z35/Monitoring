@@ -18,7 +18,6 @@ router.post('/index', async(req,res)=>{
         res.redirect('/user/admin');
     }else if(newObject.idUsuario!=null&&newObject.Password!=null){
         const object = await pool.query('select * from usuario where idUsuario = ?',[newObject.idUsuario]);
-        console.log(object);
         if(object.length!=0){
             const resp = await helpers.matchPassword(newObject.Password,object[0].Password);
         if(resp){
@@ -28,8 +27,9 @@ router.post('/index', async(req,res)=>{
             if(object[0].Tipo_idTipo==1){
                 res.redirect('/user/secretary');
             }else if(object[0].Tipo_idTipo==2){
-                
                 res.redirect('/user/teacher');
+            }else if(object[0].Tipo_idTipo==3){
+                res.redirect('/user/student');
             }
         }else{
             req.flash('message', 'Contrasena erronea');

@@ -59,6 +59,7 @@ app.use(require('./routes/authentication'));
 app.use('/user',require('./routes/admin'));
 app.use('/user',require('./routes/secretary'));
 app.use('/user',require('./routes/teacher'));
+app.use('/user',require('./routes/student'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
