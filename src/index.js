@@ -58,6 +58,7 @@ app.use(require('./routes'));
 app.use(require('./routes/authentication'));
 app.use('/user',require('./routes/admin'));
 app.use('/user',require('./routes/secretary'));
+app.use('/user',require('./routes/teacher'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -65,4 +66,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Stating Servers
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'))
+});
+
+
+//Configure
+var hbs = exphbs.create({});
+
+hbs.handlebars.registerHelper({
+    eq: (v1, v2) => v1 === v2,
+    ne: (v1, v2) => v1 !== v2,
+    lt: (v1, v2) => v1 < v2,
+    gt: (v1, v2) => v1 > v2,
+    lte: (v1, v2) => v1 <= v2,
+    gte: (v1, v2) => v1 >= v2,
+    and() {
+        return Array.prototype.every.call(arguments, Boolean);
+    },
+    or() {
+        return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+    }
 });

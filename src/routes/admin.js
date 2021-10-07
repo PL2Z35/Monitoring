@@ -44,16 +44,24 @@ router.post('/addUsuario', async(req,res) => {
 
 router.get('/deleteUsuario/:idUsuario', async(req,res) => {
     const {idUsuario} = req.params;
-    await pool.query('delete from usuario where idUsuario = ?',[idUsuario]);
-    req.flash('success', 'Usuario elmininado correctamente');
+    try {
+        await pool.query('delete from usuario where idUsuario = ?',[idUsuario]);
+        req.flash('success', 'Usuario elmininado correctamente');
+    } catch (error) {
+        req.flash('message', 'El usuario esta registrado en materias.');
+    }
     res.redirect('/user/admin');
 })
 
 router.get('/deleteCarrera/:idCarrera', async(req,res) => {
     const {idCarrera} = req.params;
     console.log(idCarrera);
-    await pool.query('delete from carrera where idCarrera = ?',[idCarrera]);
-    req.flash('success', 'Carrera eliminada correctamente');
+    try {
+        const aux = await pool.query('delete from carrera where idCarrera = ?',[idCarrera]);
+        req.flash('success', 'Carrera eliminada correctamente');;
+    } catch (error) {
+        req.flash('message', 'No se puede eliminar, hay usuarios asociados a la carrera');
+    }
     res.redirect('/user/admin');
 })
 

@@ -9,32 +9,38 @@ router.get('/index', (req,res)=>{
 })
 
 router.post('/index', async(req,res)=>{
+    console.log('asas');
     const{idUsuario, Password}=req.body;
     const newObject = {idUsuario,Password}
-    console.log(newObject);
     if(newObject.idUsuario=="Admin"&&newObject.Password=="Admin"){
         userActive = "Administrador";
         typeActive = "Administrador";
         res.redirect('/user/admin');
     }else if(newObject.idUsuario!=null&&newObject.Password!=null){
         const object = await pool.query('select * from usuario where idUsuario = ?',[newObject.idUsuario]);
+        console.log(object);
         if(object.length!=0){
             const resp = await helpers.matchPassword(newObject.Password,object[0].Password);
         if(resp){
             userActive = object[0].idUsuario;
             typeActive = object[0].Tipo_idTipo;
             userCarrera = object[0].Carrera_idCarrera;
-            console.log(object[0].Tipo_idTipo);
-            console.log(object);
             if(object[0].Tipo_idTipo==1){
                 res.redirect('/user/secretary');
+            }else if(object[0].Tipo_idTipo==2){
+                
+                res.redirect('/user/teacher');
             }
         }else{
+            req.flash('message', 'Contrasena erronea');
             res.redirect('/');
         }
+        }else{
+            req.flash('message', 'Usuario no encontado');
+            res.redirect('/');
         }
-        res.redirect('/');
     }else{
+        req.flash('message', 'Faltan espacios por rellenar');
         res.redirect('/');
     }
 })

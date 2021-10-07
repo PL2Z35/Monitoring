@@ -9,9 +9,9 @@
             <i class="fas fa-bars"></i>
         </button>
         <form action="/index" method="POST">
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                
                     {{#if Admin}}
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
                             href="#portfolio">Carreras</a></li>
@@ -23,12 +23,17 @@
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
                             href="#portfolio">Materias</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="#about">Usuarios</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
                             href="/logout">Perfil</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
                             href="/logout">LogOut</a></li>
+                    {{else if profesor}}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="#portfolio">Materias</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="/logout">LogOut</a></li>
+
                     {{else}}
+
                     <li class="nav-item mx-0 mx-lg-1">
                         <div class="form-floating mb-3">
                             <input name="idUsuario" class="form-control" id="phone" type="tel"
@@ -40,18 +45,21 @@
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
                         <div class="form-floating mb-3">
-                            <input name="Password" class="form-control" id="phone" type="tel"
+                            <input name="Password" class="form-control" id="phone" type="password"
                                 placeholder="(123) 456-7890" data-sb-validations="required" />
                             <label for="phone">Contrasena</label>
                             <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.
                             </div>
                         </div>
                     </li>
-                    <button class="nav-item mx-0 mx-lg-1" type="submit">Login</button>
+                    <button class="nav-item mx-0 mx-lg-1 rounded" type="submit"><a
+                            class="nav-link py-0 px-1 px-lg-2 rounded" href="/logout">LogIn</a></button>
+
                     {{/if}}
-                </ul>
-            </div>
-        </form>
+                
+            </ul>
+        </div>
+</form>
 
     </div>
 </nav>
