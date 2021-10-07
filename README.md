@@ -2,4 +2,4 @@
  Personal Proyect
 
 # Inializaciton
-# npm run dev
+npm run dev
